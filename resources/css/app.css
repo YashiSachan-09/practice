@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300..600&display=swap');
+@import 'tailwindcss';
+
+/* Manual theme toggle: default v4 `dark:` only follows OS preference, not `html.dark`. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans:
+        Outfit, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    --font-display: 'Cormorant Garamond', ui-serif, Georgia, serif;
+
+    --color-gallery-void: oklch(0.21 0.04 278);
+    --color-gallery-velvet: oklch(0.38 0.15 296);
+    --color-gallery-ruby: oklch(0.48 0.18 22);
+    --color-gallery-amber: oklch(0.78 0.13 74);
+    --color-gallery-sand: oklch(0.94 0.03 88);
+    --color-gallery-mist: oklch(0.98 0.01 88);
+    --color-gallery-emerald: oklch(0.55 0.12 168);
+}
+
+@layer utilities {
+    .font-display {
+        font-family: var(--font-display);
+    }
+
+    .text-gradient-gold {
+        background: linear-gradient(
+            135deg,
+            oklch(0.88 0.12 92) 0%,
+            oklch(0.72 0.14 64) 50%,
+            oklch(0.58 0.12 40) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .bg-gallery-mesh {
+        background-color: var(--color-gallery-void);
+        background-image:
+            radial-gradient(ellipse 120% 80% at 10% 0%, oklch(0.42 0.18 296 / 0.45), transparent 50%),
+            radial-gradient(ellipse 90% 60% at 90% 20%, oklch(0.38 0.14 22 / 0.35), transparent 55%),
+            radial-gradient(circle at 50% 100%, oklch(0.52 0.08 168 / 0.25), transparent 45%);
+    }
+
+    .card-glass {
+        @apply backdrop-blur-md border border-white/10 rounded-2xl;
+        background: linear-gradient(
+            145deg,
+            oklch(1 0 0 / 0.06) 0%,
+            oklch(0.25 0.04 280 / 0.35) 100%
+        );
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-medium tracking-wide transition;
+        background: linear-gradient(
+            135deg,
+            #1e3a8a 0%,
+            #1d4ed8 100%
+        );
+        color: #f8fafc;
+        box-shadow:
+            0 8px 20px rgba(37, 99, 235, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+        filter: brightness(1.08);
+        transform: translateY(-1px);
+    }
+
+    .btn-outline {
+        @apply inline-flex items-center justify-center gap-2 rounded-full border px-7 py-3 font-medium tracking-wide transition;
+        border-color: #cbd5e1;
+        color: #334155;
+        background: #ffffff;
+    }
+
+    .btn-outline:hover {
+        border-color: #94a3b8;
+        background: #f8fafc;
+    }
+
+    .section-kicker {
+        @apply text-xs font-semibold uppercase tracking-[0.35em];
+    }
+}
+
+/* Smooth anchors */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+:root {
+    --site-bg: #f7f8fb;
+    --site-bg-soft: #ffffff;
+    --site-text: #1f2430;
+    --site-text-muted: #5a6475;
+    --site-border: rgba(20, 28, 45, 0.12);
+    --site-header: rgba(255, 255, 255, 0.92);
+}
+
+html[data-theme='dark'] {
+    --site-bg: #0f1222;
+    --site-bg-soft: #171b2f;
+    --site-text: #eef2ff;
+    --site-text-muted: #b9c2dc;
+    --site-border: rgba(255, 255, 255, 0.12);
+    --site-header: rgba(15, 18, 34, 0.9);
+}
+
+body {
+    background: var(--site-bg);
+    color: var(--site-text);
+}
+
+html[data-theme='light'] .section-kicker {
+    color: #64748b;
+}
+
+html[data-theme='dark'] .section-kicker {
+    color: oklch(0.78 0.1 74);
+}
+
+/* Footer: explicit link colors so light mode never inherits low-contrast tones */
+footer.site-panel .footer-link {
+    color: #334155;
+    text-decoration: none;
+}
+
+footer.site-panel .footer-link:hover {
+    color: #0f172a;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+html[data-theme='dark'] footer.site-panel .footer-link {
+    color: #e2e8f0;
+}
+
+html[data-theme='dark'] footer.site-panel .footer-link:hover {
+    color: #ffffff;
+}
+
+.site-header {
+    background: var(--site-header);
+    border-bottom: 1px solid var(--site-border);
+}
+
+.site-panel {
+    background: var(--site-bg-soft);
+    border: 1px solid var(--site-border);
+}
+
+.site-text-muted {
+    color: var(--site-text-muted);
+}
+
+.site-theme-btn {
+    border: 1px solid var(--site-border);
+    background: var(--site-bg-soft);
+    color: var(--site-text);
+}
+
+.site-header .nav-link {
+    color: var(--site-text-muted);
+}
+
+.site-header .nav-link:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--site-text);
+}
+
+.site-header .nav-link-active {
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--site-text);
+}
+
+html[data-theme='dark'] .site-header .nav-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--site-text);
+}
+
+html[data-theme='dark'] .site-header .nav-link-active {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--site-text);
+}
+
+.home-slider-track {
+    display: flex;
+    transition: transform 450ms ease;
+}
+
+.home-slider-item {
+    min-width: 100%;
+}
+
+html[data-theme='dark'] .btn-outline {
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #e2e8f0;
+    background: rgba(15, 23, 42, 0.55);
+}
+
+html[data-theme='dark'] .btn-outline:hover {
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(30, 41, 59, 0.7);
+}
