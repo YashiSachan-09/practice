@@ -1,7 +1,7 @@
 @extends('layouts.gallery')
 
 @section('meta_description')
-    Discover Anayra, a premium art and gallery marketplace with curated collections, artist stories, private viewings, and collector-grade support.
+    Discover A7 ANAYARAA, a premium art and gallery marketplace with curated collections, artist stories, private viewings, and collector-grade support.
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
                             <div class="absolute inset-0 bg-gradient-to-r from-black/65 via-black/45 to-black/30"></div>
                             <div class="absolute inset-0 flex items-end">
                                 <div class="max-w-3xl p-8 sm:p-14">
-                                    <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-200">ANAYRA PREMIUM GALLERY</p>
+                                    <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-200 sm:text-xs sm:tracking-[0.28em]">A7 ANAYARAA · PREMIUM GALLERY</p>
                                     <h1 class="font-display mt-4 text-4xl leading-tight text-white sm:text-6xl">{{ $heading }}</h1>
                                     <p class="mt-5 max-w-2xl text-sm leading-relaxed text-slate-200 sm:text-base">{{ $caption }}</p>
                                     <div class="mt-8 flex flex-wrap gap-3">

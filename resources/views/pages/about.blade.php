@@ -1,17 +1,17 @@
 @extends('layouts.gallery')
 
 @section('meta_description')
-    Learn about Anayra’s premium curatorial philosophy, team, values, and global collector-first experience.
+    Learn about A7 ANAYARAA’s premium curatorial philosophy, team, values, and global collector-first experience.
 @endsection
 
 @section('content')
     <section class="border-b border-slate-200 bg-white py-16 dark:border-slate-700 dark:bg-slate-950">
         <div class="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-2 lg:items-center lg:px-8">
             <div>
-                <p class="section-kicker">About Anayra</p>
+                <p class="section-kicker">About A7 ANAYARAA</p>
                 <h1 class="font-display mt-4 text-5xl leading-tight text-slate-900 dark:text-white">A premium marketplace for meaningful art collecting.</h1>
                 <p class="mt-6 text-base leading-relaxed text-slate-600 dark:text-slate-300">
-                    Anayra brings together curators, artists, and collectors on a platform designed for trust, quality, and timeless aesthetics. Every detail, from listing presentation to delivery support, is built for a refined experience.
+                    A7 ANAYARAA brings together curators, artists, and collectors on a platform designed for trust, quality, and timeless aesthetics. Every detail, from listing presentation to delivery support, is built for a refined experience.
                 </p>
             </div>
             <img decoding="async" src="https://images.unsplash.com/photo-1577720643272-265f09367456?auto=format&fit=crop&w=1400&q=80" alt="Gallery interior" class="h-[420px] w-full rounded-3xl object-cover shadow-sm" loading="lazy" />

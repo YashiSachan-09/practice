@@ -14,10 +14,10 @@
     <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <a href="{{ route('home') }}" class="group flex items-center gap-3">
             <span
-                class="font-display text-3xl font-semibold tracking-tight text-gradient-gold transition group-hover:opacity-95"
+                class="font-display text-xl font-semibold tracking-tight text-gradient-gold transition group-hover:opacity-95 sm:text-2xl md:text-3xl"
                 style="letter-spacing: 0.04em;"
             >
-                ANAYRA
+                A7 ANAYARAA
             </span>
             <span class="hidden text-[10px] font-medium uppercase tracking-[0.55em] text-gallery-amber/80 sm:inline">
                 Gallery

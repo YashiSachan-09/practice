@@ -27,7 +27,7 @@
     <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div class="grid gap-12 md:grid-cols-2 xl:grid-cols-5">
             <div>
-                <span class="font-display text-3xl font-semibold text-gradient-gold">ANAYRA</span>
+                <span class="font-display text-xl font-semibold text-gradient-gold sm:text-2xl md:text-3xl">A7 ANAYARAA</span>
                 <p class="mt-4 max-w-sm text-sm leading-relaxed text-slate-600">
                     A bridge between eminent studios and passionate collectors worldwide. Every piece is stewarded through
                     curatorial review so you can acquire with intuition and certainty.
@@ -81,7 +81,7 @@
         </div>
 
         <div class="mt-16 flex flex-col items-start justify-between gap-4 border-t border-slate-200 pt-10 text-[11px] text-slate-500 sm:flex-row sm:items-center">
-            <p>© {{ date('Y') }} Anayra Gallery & Marketplace. Concept experience — replace copy with legally binding text before launch.</p>
+            <p>© {{ date('Y') }} A7 ANAYARAA Gallery & Marketplace. Concept experience — replace copy with legally binding text before launch.</p>
             <p class="text-slate-400">Structured for Laravel migrations across PostgreSQL (Supabase) and MySQL without raw SQL divergence.</p>
         </div>
     </div>

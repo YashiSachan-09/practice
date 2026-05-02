@@ -1,7 +1,7 @@
 @extends('layouts.gallery')
 
 @section('meta_description')
-    Contact Anayra for private viewings, artwork consultation, artist partnerships, and collector support.
+    Contact A7 ANAYARAA for private viewings, artwork consultation, artist partnerships, and collector support.
 @endsection
 
 @section('content')

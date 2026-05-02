@@ -1,9 +1,9 @@
-@extends('layouts.admin')
+@extends('layouts.admin-login')
 
 @section('content')
     <div class="flex min-h-screen flex-col justify-center px-4 py-14 sm:px-6">
         <div class="mx-auto w-full max-w-md">
-            <p class="font-display text-center text-3xl tracking-tight text-gradient-gold">ANAYRA</p>
+            <p class="font-display text-center text-2xl tracking-tight text-gradient-gold sm:text-3xl">A7 ANAYARAA</p>
             <p class="mt-2 text-center text-xs uppercase tracking-[0.45em] text-gallery-amber/70">Administrative workspace</p>
 
             @if ($errors->any())
@@ -27,7 +27,7 @@
                         required
                         autofocus
                         class="mt-3 w-full rounded-xl border border-white/10 bg-gallery-void/60 px-4 py-3 text-sm text-white outline-none placeholder:text-gallery-sand/40 focus:border-gallery-amber/55"
-                        placeholder="admin@anayra.gallery"
+                        placeholder="admin@a7anayaraa.gallery"
                     />
                 </div>
                 <div>

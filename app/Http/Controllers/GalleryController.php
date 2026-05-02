@@ -11,49 +11,49 @@ class GalleryController extends Controller
     public function index(): View
     {
         return view('pages.home', [
-            'title' => 'Anayra — Art & Gallery Marketplace',
+            'title' => 'A7 ANAYARAA — Art & Gallery Marketplace',
         ]);
     }
 
     public function about(): View
     {
         return view('pages.about', [
-            'title' => 'Our Story — Anayra',
+            'title' => 'Our Story — A7 ANAYARAA',
         ]);
     }
 
     public function marketplace(): View
     {
         return view('pages.marketplace', [
-            'title' => 'Marketplace — Anayra',
+            'title' => 'Marketplace — A7 ANAYARAA',
         ]);
     }
 
     public function artists(): View
     {
         return view('pages.artists', [
-            'title' => 'Artists — Anayra',
+            'title' => 'Artists — A7 ANAYARAA',
         ]);
     }
 
     public function exhibitions(): View
     {
         return view('pages.exhibitions', [
-            'title' => 'Exhibitions — Anayra',
+            'title' => 'Exhibitions — A7 ANAYARAA',
         ]);
     }
 
     public function journal(): View
     {
         return view('pages.journal', [
-            'title' => 'Journal — Anayra',
+            'title' => 'Journal — A7 ANAYARAA',
         ]);
     }
 
     public function contact(): View
     {
         return view('pages.contact', [
-            'title' => 'Contact — Anayra',
+            'title' => 'Contact — A7 ANAYARAA',
         ]);
     }
 

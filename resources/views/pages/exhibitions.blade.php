@@ -1,7 +1,7 @@
 @extends('layouts.gallery')
 
 @section('meta_description')
-    Explore upcoming Anayra exhibitions, events, and premium gallery showcases.
+    Explore upcoming A7 ANAYARAA exhibitions, events, and premium gallery showcases.
 @endsection
 
 @section('content')

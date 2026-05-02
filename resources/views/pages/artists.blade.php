@@ -1,7 +1,7 @@
 @extends('layouts.gallery')
 
 @section('meta_description')
-    Meet featured artists on Anayra and explore their signature styles, collections, and curated profiles.
+    Meet featured artists on A7 ANAYARAA and explore their signature styles, collections, and curated profiles.
 @endsection
 
 @section('content')
@@ -43,7 +43,7 @@
 
     <section class="bg-white py-20 dark:bg-slate-950">
         <div class="mx-auto max-w-4xl px-6 text-center lg:px-8">
-            <h2 class="font-display text-4xl text-slate-900 sm:text-5xl dark:text-white">Collaborate with Anayra</h2>
+            <h2 class="font-display text-4xl text-slate-900 sm:text-5xl dark:text-white">Collaborate with A7 ANAYARAA</h2>
             <p class="mt-6 text-base leading-relaxed text-slate-600 dark:text-slate-300">
                 We welcome thoughtful artists with a distinctive voice and a professional portfolio.
             </p>

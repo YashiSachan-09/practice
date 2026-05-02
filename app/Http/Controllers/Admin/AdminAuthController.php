@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ class AdminAuthController extends Controller
         }
 
         return view('admin.login', [
-            'title' => 'Admin login — Anayra',
+            'title' => 'Admin login — A7 ANAYARAA',
         ]);
     }
 
@@ -31,8 +32,8 @@ class AdminAuthController extends Controller
             'remember' => ['sometimes', 'boolean'],
         ]);
 
-        /** @var \App\Models\User|null $user */
-        $user = \App\Models\User::query()->where('email', $credentials['email'])->first();
+        /** @var User|null $user */
+        $user = User::query()->where('email', $credentials['email'])->first();
 
         if (! $user || ! $user->is_admin || ! Hash::check($credentials['password'], $user->password)) {
             throw ValidationException::withMessages([
@@ -43,7 +44,8 @@ class AdminAuthController extends Controller
         Auth::login($user, (bool) $request->boolean('remember'));
         $request->session()->regenerate();
 
-        return redirect()->intended(route('admin.dashboard'));
+        // SPA lives at `/admin/dashboard`; skip stale `url.intended` URLs that break client routing.
+        return redirect()->route('admin.dashboard');
     }
 
     public function logout(Request $request): RedirectResponse

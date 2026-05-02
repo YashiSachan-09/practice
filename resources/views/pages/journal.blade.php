@@ -1,7 +1,7 @@
 @extends('layouts.gallery')
 
 @section('meta_description')
-    Read Anayra Journal: curator insights, artist stories, collecting tips, and market perspectives.
+    Read A7 ANAYARAA Journal: curator insights, artist stories, collecting tips, and market perspectives.
 @endsection
 
 @section('content')

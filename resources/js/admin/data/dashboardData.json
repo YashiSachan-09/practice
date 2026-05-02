@@ -1,0 +1,91 @@
+{
+  "stats": {
+    "totalOrders": 1245,
+    "ordersTrend": 12.5,
+    "totalSales": 54580,
+    "salesTrend": 8.3,
+    "totalProducts": 356,
+    "productsTrend": 4.5,
+    "totalCustomers": 2356,
+    "customersTrend": 10.2,
+    "currency": "₹"
+  },
+  "salesOverview": {
+    "thisMonth": [
+      { "day": "1 May", "value": 12000 },
+      { "day": "5 May", "value": 18000 },
+      { "day": "10 May", "value": 14000 },
+      { "day": "15 May", "value": 26000 },
+      { "day": "20 May", "value": 22000 },
+      { "day": "25 May", "value": 32000 },
+      { "day": "31 May", "value": 38000 }
+    ],
+    "lastMonth": [
+      { "day": "1 May", "value": 8000 },
+      { "day": "5 May", "value": 12000 },
+      { "day": "10 May", "value": 16000 },
+      { "day": "15 May", "value": 14000 },
+      { "day": "20 May", "value": 18000 },
+      { "day": "25 May", "value": 21000 },
+      { "day": "31 May", "value": 23000 }
+    ]
+  },
+  "recentOrders": [
+    {
+      "id": "#78432",
+      "customer": "Rajesh Kapoor",
+      "amount": 12990,
+      "status": "delivered",
+      "image": "https://picsum.photos/seed/o1/64/64"
+    },
+    {
+      "id": "#78431",
+      "customer": "Ananya Mehta",
+      "amount": 4599,
+      "status": "shipped",
+      "image": "https://picsum.photos/seed/o2/64/64"
+    },
+    {
+      "id": "#78430",
+      "customer": "Vikram Singh",
+      "amount": 21999,
+      "status": "pending",
+      "image": "https://picsum.photos/seed/o3/64/64"
+    },
+    {
+      "id": "#78429",
+      "customer": "Sneha Rao",
+      "amount": 3299,
+      "status": "delivered",
+      "image": "https://picsum.photos/seed/o4/64/64"
+    },
+    {
+      "id": "#78428",
+      "customer": "Arjun Nair",
+      "amount": 899,
+      "status": "cancelled",
+      "image": "https://picsum.photos/seed/o5/64/64"
+    }
+  ],
+  "topSelling": [
+    { "name": "Wireless headphones", "sold": 240, "thumb": "https://picsum.photos/seed/p1/48/48" },
+    { "name": "Smart watch Pro", "sold": 198, "thumb": "https://picsum.photos/seed/p2/48/48" },
+    { "name": "Leather tote bag", "sold": 176, "thumb": "https://picsum.photos/seed/p3/48/48" },
+    { "name": "Ceramic table lamp", "sold": 142, "thumb": "https://picsum.photos/seed/p4/48/48" },
+    { "name": "Minimal desk mat", "sold": 128, "thumb": "https://picsum.photos/seed/p5/48/48" }
+  ],
+  "salesByCategory": [
+    { "name": "Electronics", "value": 40, "fill": "#6366f1" },
+    { "name": "Fashion", "value": 30, "fill": "#8b5cf6" },
+    { "name": "Home & kitchen", "value": 15, "fill": "#ec4899" },
+    { "name": "Beauty", "value": 10, "fill": "#f97316" },
+    { "name": "Others", "value": 5, "fill": "#94a3b8" }
+  ],
+  "lowStock": [
+    { "name": "Canvas print — Midnight", "stock": 3, "thumb": "https://picsum.photos/seed/l1/48/48" },
+    { "name": "Oak frame medium", "stock": 5, "thumb": "https://picsum.photos/seed/l2/48/48" },
+    { "name": "Limited lithograph II", "stock": 7, "thumb": "https://picsum.photos/seed/l3/48/48" },
+    { "name": "Sculptural vase", "stock": 4, "thumb": "https://picsum.photos/seed/l4/48/48" },
+    { "name": "Signature catalog 2026", "stock": 8, "thumb": "https://picsum.photos/seed/l5/48/48" }
+  ]
+}

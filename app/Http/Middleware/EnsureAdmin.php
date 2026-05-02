@@ -17,7 +17,11 @@ class EnsureAdmin
         $user = Auth::user();
 
         if (! $user?->is_admin) {
-            abort(403);
+            return redirect()
+                ->route('admin.login')
+                ->withErrors([
+                    'email' => __('You must sign in with an administrator account.'),
+                ]);
         }
 
         return $next($request);
