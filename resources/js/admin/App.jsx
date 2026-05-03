@@ -37,5 +37,6 @@ function AdminUnknownRedirect() {
     if (import.meta.env.DEV) {
         console.warn('[admin]', 'Unknown SPA path, sending to dashboard:', location.pathname);
     }
-    return <Navigate to="/dashboard" replace />;
+    // Relative path keeps React Router basename `/admin` correct (avoid stray `/dashboard` off-app routes).
+    return <Navigate to="dashboard" replace relative="path" />;
 }

@@ -11,6 +11,11 @@ return [
 
     'key_secret' => env('RAZORPAY_KEY_SECRET'),
 
+    /**
+     * Webhooks → Signing secret from Razorpay dashboard (optional).
+     */
+    'webhook_secret' => env('RAZORPAY_WEBHOOK_SECRET'),
+
     /*
     |--------------------------------------------------------------------------
     | When both keys are set, checkout redirects to Razorpay before confirmation.

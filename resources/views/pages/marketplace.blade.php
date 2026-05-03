@@ -25,10 +25,13 @@
                     <p class="section-kicker">Acquire</p>
                     <h2 class="font-display mt-2 text-3xl text-slate-900 dark:text-white">Ready-to-checkout works</h2>
                     <p class="mt-2 max-w-xl text-sm text-slate-600 dark:text-slate-300">
-                        Choose a listing, complete guest checkout, and your order appears instantly in the admin Orders board for fulfilment.
+                        Browse the full React shop with cart and account, or use quick guest checkout here — orders land in Admin → Orders either way.
                     </p>
                 </div>
-                <a href="{{ route('checkout') }}" class="btn-primary shrink-0">Open checkout</a>
+                <div class="flex shrink-0 flex-wrap gap-3">
+                    <a href="{{ url('/shop') }}" class="btn-primary">Full shop experience</a>
+                    <a href="{{ route('checkout') }}" class="btn-outline">Quick checkout</a>
+                </div>
             </div>
             <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach (config('storefront.catalog', []) as $sku => $meta)

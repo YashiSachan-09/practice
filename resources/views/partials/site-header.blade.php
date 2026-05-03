@@ -1,6 +1,7 @@
 @php
     $links = [
         ['route' => 'home', 'label' => 'Home'],
+        ['href' => url('/shop'), 'label' => 'Shop'],
         ['route' => 'about', 'label' => 'Our Story'],
         ['route' => 'marketplace', 'label' => 'Marketplace'],
         ['route' => 'artists', 'label' => 'Artists'],
@@ -27,10 +28,14 @@
         {{-- Desktop --}}
         <nav class="hidden flex-wrap justify-center gap-1 xl:flex xl:gap-0" aria-label="Primary">
             @foreach ($links as $link)
+                @php
+                    $href = $link['href'] ?? route($link['route']);
+                    $isActive = isset($link['route']) && request()->routeIs($link['route']);
+                @endphp
                 <a
-                    href="{{ route($link['route']) }}"
-                    class="nav-link rounded-full px-4 py-2 text-sm transition {{ request()->routeIs($link['route']) ? 'nav-link-active font-semibold' : '' }}"
-                    @if(request()->routeIs($link['route'])) aria-current="page" @endif
+                    href="{{ $href }}"
+                    class="nav-link rounded-full px-4 py-2 text-sm transition {{ $isActive ? 'nav-link-active font-semibold' : '' }}"
+                    @if($isActive) aria-current="page" @endif
                 >
                     {{ $link['label'] }}
                 </a>
@@ -55,10 +60,14 @@
             >
                 <nav class="flex flex-col gap-1" aria-label="Primary mobile">
                     @foreach ($links as $link)
+                        @php
+                            $href = $link['href'] ?? route($link['route']);
+                            $isActive = isset($link['route']) && request()->routeIs($link['route']);
+                        @endphp
                         <a
-                            href="{{ route($link['route']) }}"
-                            class="nav-link rounded-xl px-4 py-3 text-sm {{ request()->routeIs($link['route']) ? 'nav-link-active font-semibold' : '' }}"
-                            @if(request()->routeIs($link['route'])) aria-current="page" @endif
+                            href="{{ $href }}"
+                            class="nav-link rounded-xl px-4 py-3 text-sm {{ $isActive ? 'nav-link-active font-semibold' : '' }}"
+                            @if($isActive) aria-current="page" @endif
                         >
                             {{ $link['label'] }}
                         </a>

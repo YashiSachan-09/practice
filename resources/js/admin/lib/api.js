@@ -142,3 +142,28 @@ export async function fetchReportSummary(params) {
     const { data } = await api.get('/admin/api/reports/summary', { params });
     return data;
 }
+
+export async function fetchAdminProducts(params) {
+    const { data } = await api.get('/admin/api/products', { params });
+    return data;
+}
+
+export async function fetchAdminProduct(id) {
+    const { data } = await api.get(`/admin/api/products/${id}`);
+    return data;
+}
+
+export async function postAdminProduct(body) {
+    const { data } = await api.post('/admin/api/products', body);
+    return data;
+}
+
+export async function patchAdminProduct(id, body) {
+    const { data } = await api.patch(`/admin/api/products/${id}`, body);
+    return data;
+}
+
+export async function deleteAdminProduct(id) {
+    const { data } = await api.delete(`/admin/api/products/${id}`);
+    return data;
+}

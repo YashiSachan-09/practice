@@ -63,4 +63,23 @@ class RazorpayPaymentService
 
         return hash_equals($expected, $razorpaySignature);
     }
+
+    /**
+     * Verify Razorpay webhook signature (raw request body).
+     */
+    public function verifyWebhookSignature(string $rawPayload, ?string $razorpaySignatureHeader): bool
+    {
+        if (! is_string($razorpaySignatureHeader) || $razorpaySignatureHeader === '') {
+            return false;
+        }
+
+        $secret = config('razorpay.webhook_secret');
+        if (! is_string($secret) || $secret === '') {
+            return false;
+        }
+
+        $expected = hash_hmac('sha256', $rawPayload, $secret);
+
+        return hash_equals($expected, $razorpaySignatureHeader);
+    }
 }

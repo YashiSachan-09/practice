@@ -1,6 +1,7 @@
 <?php
     $links = [
         ['route' => 'home', 'label' => 'Home'],
+        ['href' => url('/shop'), 'label' => 'Shop'],
         ['route' => 'about', 'label' => 'Our Story'],
         ['route' => 'marketplace', 'label' => 'Marketplace'],
         ['route' => 'artists', 'label' => 'Artists'],
@@ -27,10 +28,14 @@
         
         <nav class="hidden flex-wrap justify-center gap-1 xl:flex xl:gap-0" aria-label="Primary">
             <?php $__currentLoopData = $links; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $link): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php
+                    $href = $link['href'] ?? route($link['route']);
+                    $isActive = isset($link['route']) && request()->routeIs($link['route']);
+                ?>
                 <a
-                    href="<?php echo e(route($link['route'])); ?>"
-                    class="nav-link rounded-full px-4 py-2 text-sm transition <?php echo e(request()->routeIs($link['route']) ? 'nav-link-active font-semibold' : ''); ?>"
-                    <?php if(request()->routeIs($link['route'])): ?> aria-current="page" <?php endif; ?>
+                    href="<?php echo e($href); ?>"
+                    class="nav-link rounded-full px-4 py-2 text-sm transition <?php echo e($isActive ? 'nav-link-active font-semibold' : ''); ?>"
+                    <?php if($isActive): ?> aria-current="page" <?php endif; ?>
                 >
                     <?php echo e($link['label']); ?>
 
@@ -56,10 +61,14 @@
             >
                 <nav class="flex flex-col gap-1" aria-label="Primary mobile">
                     <?php $__currentLoopData = $links; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $link): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php
+                            $href = $link['href'] ?? route($link['route']);
+                            $isActive = isset($link['route']) && request()->routeIs($link['route']);
+                        ?>
                         <a
-                            href="<?php echo e(route($link['route'])); ?>"
-                            class="nav-link rounded-xl px-4 py-3 text-sm <?php echo e(request()->routeIs($link['route']) ? 'nav-link-active font-semibold' : ''); ?>"
-                            <?php if(request()->routeIs($link['route'])): ?> aria-current="page" <?php endif; ?>
+                            href="<?php echo e($href); ?>"
+                            class="nav-link rounded-xl px-4 py-3 text-sm <?php echo e($isActive ? 'nav-link-active font-semibold' : ''); ?>"
+                            <?php if($isActive): ?> aria-current="page" <?php endif; ?>
                         >
                             <?php echo e($link['label']); ?>
 

@@ -7,11 +7,19 @@ use App\Http\Controllers\Admin\Api\AdminCouponController;
 use App\Http\Controllers\Admin\Api\AdminCustomerController;
 use App\Http\Controllers\Admin\Api\AdminDashboardController;
 use App\Http\Controllers\Admin\Api\AdminOrderController;
+use App\Http\Controllers\Admin\Api\AdminProductController;
 use App\Http\Controllers\Admin\Api\AdminReportController;
 use App\Http\Controllers\Admin\Api\AdminReviewController;
 use App\Http\Controllers\Admin\Api\AdminSettingController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\Shop\ShopAuthController;
+use App\Http\Controllers\Shop\ShopBootstrapController;
+use App\Http\Controllers\Shop\ShopCartController;
+use App\Http\Controllers\Shop\ShopCatalogController;
+use App\Http\Controllers\Shop\ShopCheckoutController;
+use App\Http\Controllers\Shop\ShopOrderController;
+use App\Http\Controllers\Shop\ShopRazorpayWebhookController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
@@ -28,6 +36,39 @@ Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'submit'])->name('checkout.submit');
 Route::post('/checkout/razorpay/verify', [CheckoutController::class, 'verifyRazorpay'])->name('checkout.razorpay.verify');
 Route::get('/order/confirmation/{order_number}', [CheckoutController::class, 'confirmation'])->name('order.confirmation');
+
+Route::prefix('shop')->middleware('web')->name('shop.')->group(function (): void {
+    Route::post('/webhooks/razorpay', ShopRazorpayWebhookController::class)->name('webhooks.razorpay');
+
+    Route::prefix('api')->name('api.')->group(function (): void {
+        Route::get('/bootstrap', ShopBootstrapController::class)->name('bootstrap');
+
+        Route::get('/categories', [ShopCatalogController::class, 'categories'])->name('categories.index');
+        Route::get('/products', [ShopCatalogController::class, 'products'])->name('products.index');
+        Route::get('/products/{slug}', [ShopCatalogController::class, 'show'])->name('products.show');
+
+        Route::get('/cart', [ShopCartController::class, 'index'])->name('cart.index');
+        Route::post('/cart/items', [ShopCartController::class, 'store'])->name('cart.store');
+        Route::patch('/cart/items/{cartItem}', [ShopCartController::class, 'update'])->name('cart.update');
+        Route::delete('/cart/items/{cartItem}', [ShopCartController::class, 'destroy'])->name('cart.destroy');
+        Route::delete('/cart', [ShopCartController::class, 'clear'])->name('cart.clear');
+
+        Route::get('/checkout/preview', [ShopCheckoutController::class, 'preview'])->name('checkout.preview');
+        Route::post('/checkout', [ShopCheckoutController::class, 'submit'])->name('checkout.submit');
+
+        Route::post('/auth/register', [ShopAuthController::class, 'register'])->name('auth.register');
+        Route::post('/auth/login', [ShopAuthController::class, 'login'])->name('auth.login');
+        Route::post('/auth/logout', [ShopAuthController::class, 'logout'])->middleware('auth')->name('auth.logout');
+
+        Route::middleware('auth')->group(function (): void {
+            Route::get('/orders', [ShopOrderController::class, 'index'])->name('orders.index');
+            Route::get('/orders/{order_number}', [ShopOrderController::class, 'show'])->name('orders.show');
+        });
+    });
+
+    Route::view('/', 'shop.spa')->name('spa');
+    Route::view('/{path}', 'shop.spa')->where('path', '^(?!api(?:/|$)).+')->name('page');
+});
 
 Route::prefix('admin')->name('admin.')->group(function (): void {
     Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('login');
@@ -82,6 +123,12 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
 
             Route::get('/reports/summary', [AdminReportController::class, 'summary'])->name('reports.summary');
             Route::get('/reports/orders.csv', [AdminReportController::class, 'ordersCsv'])->name('reports.orders_csv');
+
+            Route::get('/products', [AdminProductController::class, 'index'])->name('products.api.index');
+            Route::post('/products', [AdminProductController::class, 'store'])->name('products.api.store');
+            Route::get('/products/{product}', [AdminProductController::class, 'show'])->name('products.api.show');
+            Route::patch('/products/{product}', [AdminProductController::class, 'update'])->name('products.api.update');
+            Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('products.api.destroy');
         });
     });
 });

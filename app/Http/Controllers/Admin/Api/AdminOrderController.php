@@ -80,6 +80,7 @@ class AdminOrderController extends Controller
     {
         return [
             'id' => $order->id,
+            'user_id' => $order->user_id,
             'order_number' => $order->order_number,
             'customer_name' => $order->customer_name,
             'customer_email' => $order->customer_email,
