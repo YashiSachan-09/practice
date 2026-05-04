@@ -4,12 +4,17 @@ namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Services\RazorpayPaymentService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class AdminOrderController extends Controller
 {
+    public function __construct(
+        private RazorpayPaymentService $razorpay
+    ) {}
+
     public function index(Request $request): JsonResponse
     {
         $perPage = min(max($request->integer('per_page', 30), 5), 100);
@@ -73,6 +78,41 @@ class AdminOrderController extends Controller
         ]);
     }
 
+    public function refund(Request $request, Order $order): JsonResponse
+    {
+        if ($order->payment_status !== 'paid' || ! $order->razorpay_payment_id) {
+            return response()->json(['message' => __('Only paid orders with a valid payment ID can be refunded.')], 422);
+        }
+
+        $validated = $request->validate([
+            'amount' => ['nullable', 'numeric', 'min:1', 'max:' . $order->total],
+            'notes' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        $amountPaise = isset($validated['amount']) ? (int) round($validated['amount'] * 100) : null;
+
+        try {
+            $refund = $this->razorpay->refund(
+                $order->razorpay_payment_id,
+                $amountPaise,
+                ['admin_refund_notes' => $validated['notes'] ?? '']
+            );
+
+            $order->razorpay_refund_id = $refund['id'];
+            $order->refund_amount = ($amountPaise ? $amountPaise / 100 : (float) $order->total);
+            $order->refund_status = $refund['status'];
+            $order->payment_status = 'refunded';
+            $order->save();
+
+            return response()->json([
+                'data' => $this->transformOrder($order),
+                'message' => __('Refund processed successfully.'),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
+
     /**
      * @return array<string, mixed>
      */
@@ -94,7 +134,13 @@ class AdminOrderController extends Controller
             'payment_status' => $order->payment_status,
             'razorpay_order_id' => $order->razorpay_order_id,
             'razorpay_payment_id' => $order->razorpay_payment_id,
+            'razorpay_refund_id' => $order->razorpay_refund_id,
+            'refund_amount' => (float) $order->refund_amount,
+            'refund_status' => $order->refund_status,
             'tracking_number' => $order->tracking_number,
+            'shipping_provider' => $order->shipping_provider,
+            'shipping_label_url' => $order->shipping_label_url,
+            'shipping_manifest_id' => $order->shipping_manifest_id,
             'admin_notes' => $order->admin_notes,
             'confirmed_at' => $order->confirmed_at?->toIso8601String(),
             'packed_at' => $order->packed_at?->toIso8601String(),

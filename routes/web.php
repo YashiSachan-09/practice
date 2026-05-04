@@ -96,6 +96,7 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
             Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
             Route::get('/orders/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
             Route::patch('/orders/{order}', [AdminOrderController::class, 'update'])->name('orders.update');
+            Route::post('/orders/{order}/refund', [AdminOrderController::class, 'refund'])->name('orders.refund');
 
             Route::get('/categories', [AdminCategoryController::class, 'index'])->name('categories.index');
             Route::post('/categories', [AdminCategoryController::class, 'store'])->name('categories.store');
@@ -129,6 +130,7 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
             Route::get('/products/{product}', [AdminProductController::class, 'show'])->name('products.api.show');
             Route::patch('/products/{product}', [AdminProductController::class, 'update'])->name('products.api.update');
             Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('products.api.destroy');
+            Route::get('/products/{product}/stock-history', [AdminProductController::class, 'stockHistory'])->name('products.api.stock_history');
         });
     });
 });

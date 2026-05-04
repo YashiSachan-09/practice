@@ -54,8 +54,12 @@ class AdminProductController extends Controller
             'unit_price' => ['required', 'numeric', 'min:0'],
             'image_url' => ['nullable', 'string', 'max:2048'],
             'stock_quantity' => ['nullable', 'integer', 'min:0', 'max:999999'],
+            'low_stock_threshold' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['sometimes', 'boolean'],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:65535'],
+            'meta_title' => ['nullable', 'string', 'max:255'],
+            'meta_description' => ['nullable', 'string', 'max:65000'],
+            'meta_keywords' => ['nullable', 'string', 'max:255'],
         ]);
 
         $validated['slug'] = $this->makeUniqueSlug($validated['slug'] ?? null, (string) $validated['name'], (string) $validated['sku']);
@@ -76,9 +80,24 @@ class AdminProductController extends Controller
             'unit_price' => ['sometimes', 'numeric', 'min:0'],
             'image_url' => ['nullable', 'string', 'max:2048'],
             'stock_quantity' => ['nullable', 'integer', 'min:0', 'max:999999'],
+            'low_stock_threshold' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['sometimes', 'boolean'],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:65535'],
+            'meta_title' => ['nullable', 'string', 'max:255'],
+            'meta_description' => ['nullable', 'string', 'max:65000'],
+            'meta_keywords' => ['nullable', 'string', 'max:255'],
+            'stock_update_reason' => ['nullable', 'string', 'max:100'],
+            'stock_update_notes' => ['nullable', 'string', 'max:1000'],
         ]);
+
+        if (array_key_exists('stock_update_reason', $validated)) {
+            $product->stock_update_reason = $validated['stock_update_reason'];
+            unset($validated['stock_update_reason']);
+        }
+        if (array_key_exists('stock_update_notes', $validated)) {
+            $product->stock_update_notes = $validated['stock_update_notes'];
+            unset($validated['stock_update_notes']);
+        }
 
         if (array_key_exists('slug', $validated) || array_key_exists('name', $validated)) {
             $validated['slug'] = $this->makeUniqueSlug(
@@ -103,6 +122,16 @@ class AdminProductController extends Controller
         $product->delete();
 
         return response()->json(['message' => __('Product deleted.')]);
+    }
+
+    public function stockHistory(Product $product): JsonResponse
+    {
+        $history = $product->stockMovements()
+            ->with('user:id,name')
+            ->latest()
+            ->paginate(30);
+
+        return response()->json($history);
     }
 
     private function makeUniqueSlug(?string $slug, string $name, string $sku, ?int $ignoreProductId = null): string
@@ -141,8 +170,13 @@ class AdminProductController extends Controller
             'unit_price' => (float) $p->unit_price,
             'image_url' => $p->image_url,
             'stock_quantity' => $p->stock_quantity,
+            'low_stock_threshold' => $p->low_stock_threshold,
+            'is_low_stock' => $p->isLowStock(),
             'is_active' => (bool) $p->is_active,
             'sort_order' => $p->sort_order,
+            'meta_title' => $p->meta_title,
+            'meta_description' => $p->meta_description,
+            'meta_keywords' => $p->meta_keywords,
             'category' => $p->relationLoaded('category') && $p->category
                 ? ['id' => $p->category->id, 'name' => $p->category->name, 'slug' => $p->category->slug]
                 : null,

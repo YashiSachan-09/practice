@@ -16,8 +16,12 @@ class Product extends Model
         'unit_price',
         'image_url',
         'stock_quantity',
+        'low_stock_threshold',
         'is_active',
         'sort_order',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
     ];
 
     /**
@@ -29,6 +33,7 @@ class Product extends Model
             'unit_price' => 'decimal:2',
             'is_active' => 'boolean',
             'stock_quantity' => 'integer',
+            'low_stock_threshold' => 'integer',
             'sort_order' => 'integer',
         ];
     }
@@ -40,4 +45,23 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<StockMovement, Product>
+     */
+    public function stockMovements(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(StockMovement::class);
+    }
+
+    public function isLowStock(): bool
+    {
+        return $this->stock_quantity <= $this->low_stock_threshold;
+    }
+
+    /** @var string|null */
+    public $stock_update_reason;
+
+    /** @var string|null */
+    public $stock_update_notes;
 }

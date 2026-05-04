@@ -8,10 +8,44 @@ use RuntimeException;
 class RazorpayPaymentService
 {
     private const ORDERS_URL = 'https://api.razorpay.com/v1/orders';
+    private const PAYMENTS_URL = 'https://api.razorpay.com/v1/payments';
 
     public function isEnabled(): bool
     {
         return (bool) config('razorpay.enabled');
+    }
+
+    /**
+     * Create a refund for a payment.
+     *
+     * @param  string  $paymentId  Razorpay Payment ID (pay_...)
+     * @param  int|null  $amountPaise  Amount in paise. If null, full refund is processed.
+     * @param  array<string, string>  $notes
+     * @return array<string, mixed>
+     */
+    public function refund(string $paymentId, ?int $amountPaise = null, array $notes = []): array
+    {
+        $keyId = config('razorpay.key_id');
+        $keySecret = config('razorpay.key_secret');
+
+        $payload = ['notes' => $notes];
+        if ($amountPaise !== null) {
+            $payload['amount'] = $amountPaise;
+        }
+
+        $response = Http::withBasicAuth($keyId, $keySecret)
+            ->acceptJson()
+            ->asJson()
+            ->post(self::PAYMENTS_URL . '/' . $paymentId . '/refund', $payload);
+
+        if ($response->failed()) {
+            throw new RuntimeException(
+                'Razorpay refund failed: ' . $response->body(),
+                $response->status()
+            );
+        }
+
+        return $response->json();
     }
 
     /**

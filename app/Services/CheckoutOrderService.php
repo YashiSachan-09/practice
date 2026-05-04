@@ -100,6 +100,8 @@ class CheckoutOrderService
 
                     /** @var Product $p */
                     $p = $line['product'];
+                    $p->stock_update_reason = 'order_placed';
+                    $p->stock_update_notes = __('Stock deducted for order :number', ['number' => $orderNumber]);
                     $p->stock_quantity = max(0, (int) $p->stock_quantity - (int) $line['quantity']);
                     $p->save();
                 }
